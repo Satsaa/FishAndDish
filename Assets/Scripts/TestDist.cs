@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 [ExecuteInEditMode]
 public class TestDist : MonoBehaviour {
@@ -9,14 +10,18 @@ public class TestDist : MonoBehaviour {
   public Transform b1;
   public Transform b2;
 
+  public Line preLine;
+  public Line res;
+
   // Update is called once per frame
   void Update() {
-    Line a = new Line(a1.position, a2.position);
-    Line b = new Line(b1.position, b2.position);
-    a.Debug(Color.red);
-    b.Debug(Color.green);
+    Line first = new Line(a1.position, a2.position);
+    Line second = new Line(b1.position, b2.position);
 
-    var res = a.DistanceLine(b);
-    res.Debug(Color.blue);
+    first.Debug(Color.green);
+    second.Debug(Color.red);
+
+    first.ShortestConnectingLine(second).Debug(Color.cyan);
   }
+
 }
