@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058283911}
   - component: {fileID: 2058283910}
+  - component: {fileID: 2058283914}
   - component: {fileID: 2058283912}
   - component: {fileID: 2058283913}
   m_Layer: 0
@@ -414,8 +415,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 2058283912}
-  rb: {fileID: 0}
+  rb: {fileID: 2058283914}
   ambientSpeed: 0.1
+  tailMultiplier: 0.1
+  tailDecay: 0.1
+  tailReturnToStraightFraction: 0.1
   burstSpeed:
     x: 0.6
     y: 3
@@ -426,16 +430,25 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.6639874
+      value: 0.6639874
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 0
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -450,14 +463,35 @@ MonoBehaviour:
   burstRechargeTime:
     x: 0.5
     y: 1
-  burstChance: 0.5
+  burstChance: 0.509
   bursts: 0
   speedList:
   - 0.6
-  - 1.2
-  - 1.8
+  - 0.96675855
+  - 1.7268049
   - 2.4
   - 3
+--- !u!50 &2058283914
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058283909}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2124925438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2880126256423276065, guid: 6a1c355556e2dbc41a76b1ffc6e66dbf,
