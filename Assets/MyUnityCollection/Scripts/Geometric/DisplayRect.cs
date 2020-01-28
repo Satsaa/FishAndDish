@@ -8,6 +8,7 @@ public class DisplayRect : MonoBehaviour {
   public Color color = Color.magenta;
   [Range(0, 1)]
   public float fillAlpha = 0.2f;
+  public bool useExperimentalHandles = false;
 
   void OnDrawGizmos() {
     Gizmos.color = color;

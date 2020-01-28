@@ -13,7 +13,6 @@ public class DisplayRectEditor : Editor {
 
   private Camera cam { get => Camera.current; }
 
-
   private bool mouse = false;
   private Vector2 mousePos;
   private bool shift { get => Event.current.shift; }
@@ -71,87 +70,91 @@ public class DisplayRectEditor : Editor {
     var topRight = new Vector2(t.rect.xMax, t.rect.yMax);
     var topLeft = new Vector2(t.rect.xMin, t.rect.yMax);
 
-    /*
-    EditorGUI.BeginChangeCheck();
-    float3 newTopRight = Handles.PositionHandle(topRight, Quaternion.identity);
+    if (t.useExperimentalHandles) {
+      var ray = cam.ScreenPointToRay(new Vector2(mousePos.x, cam.pixelHeight - mousePos.y));
+      var plane = new Plane(Vector3.forward, 0);
+      if (plane.Raycast(ray, out var distance)) {
 
-    if (EditorGUI.EndChangeCheck()) {
-      Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-      t.rect.xMax = newTopRight.x;
-      t.rect.yMin = newTopRight.y;
-      Dirty();
-    }
+        var target = ray.GetPoint(distance).xy();
+        var diff = target - prevTarget.Add(0.01f);
 
-    EditorGUI.BeginChangeCheck();
-    float3 newTopLeft = Handles.PositionHandle(topLeft, Quaternion.identity);
+        var size = math.min(t.rect.size.x, t.rect.size.y) / 10;
 
-    if (EditorGUI.EndChangeCheck()) {
-      Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-      t.rect.xMin = newTopLeft.x;
-      t.rect.yMin = newTopLeft.y;
-      Dirty();
-    }
+        if (Handles.Button(topLeft.AddX(size).AddY(-size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
+          Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+          t.rect.xMin += diff.x;
+          t.rect.yMin += diff.y;
+          Dirty();
+        }
+        if (Handles.Button(topRight.AddX(-size).AddY(-size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
 
-    EditorGUI.BeginChangeCheck();
-    float3 newBotRight = Handles.PositionHandle(botRight, Quaternion.identity);
+          Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+          t.rect.xMax += diff.x;
+          t.rect.yMin += diff.y;
+          Dirty();
 
-    if (EditorGUI.EndChangeCheck()) {
-      Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-      t.rect.xMax = newBotRight.x;
-      t.rect.yMax = newBotRight.y;
-      Dirty();
-    }
+        }
 
-    EditorGUI.BeginChangeCheck();
-    float3 newBotLeft = Handles.PositionHandle(botLeft, Quaternion.identity);
+        if (Handles.Button(botLeft.AddX(size).AddY(size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
+          Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+          t.rect.xMin += diff.x;
+          t.rect.yMax += diff.y;
+          Dirty();
+        }
+        if (Handles.Button(botRight.AddX(-size).AddY(size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
+          Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+          t.rect.xMax += diff.x;
+          t.rect.yMax += diff.y;
+          Dirty();
+        }
 
-    if (EditorGUI.EndChangeCheck()) {
-      Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-      t.rect.xMin = newBotRight.x;
-      t.rect.yMax = newBotRight.y;
-      Dirty();
-    }
-  */
-
-    var ray = cam.ScreenPointToRay(new Vector2(mousePos.x, cam.pixelHeight - mousePos.y));
-    var plane = new Plane(Vector3.forward, 0);
-    if (plane.Raycast(ray, out var distance)) {
-
-      var target = ray.GetPoint(distance).xy();
-      var diff = target - prevTarget.Add(0.01f);
-
-      var size = math.min(t.rect.size.x, t.rect.size.y) / 10;
-
-      if (Handles.Button(topLeft.AddX(size).AddY(-size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
-        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-        t.rect.xMin += diff.x;
-        t.rect.yMin += diff.y;
-        Dirty();
-      }
-      if (Handles.Button(topRight.AddX(-size).AddY(-size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
-
-        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-        t.rect.xMax += diff.x;
-        t.rect.yMin += diff.y;
-        Dirty();
-
+        prevTarget = target;
       }
 
-      if (Handles.Button(botLeft.AddX(size).AddY(size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
+    } else {
+
+      EditorGUI.BeginChangeCheck();
+      float3 newBotRight = Handles.PositionHandle(botRight, Quaternion.identity);
+
+      if (EditorGUI.EndChangeCheck()) {
         Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-        t.rect.xMin += diff.x;
-        t.rect.yMax += diff.y;
-        Dirty();
-      }
-      if (Handles.Button(botRight.AddX(-size).AddY(size), Quaternion.identity, size, size, Handles.RectangleHandleCap)) {
-        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
-        t.rect.xMax += diff.x;
-        t.rect.yMax += diff.y;
+        t.rect.xMax = newBotRight.x;
+        t.rect.yMin = newBotRight.y;
         Dirty();
       }
 
-      prevTarget = target;
+      EditorGUI.BeginChangeCheck();
+      float3 newBotLeft = Handles.PositionHandle(botLeft, Quaternion.identity);
+
+      if (EditorGUI.EndChangeCheck()) {
+        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+        t.rect.xMin = newBotLeft.x;
+        t.rect.yMin = newBotLeft.y;
+        Dirty();
+      }
+
+      EditorGUI.BeginChangeCheck();
+      float3 newTopRight = Handles.PositionHandle(topRight, Quaternion.identity);
+
+      if (EditorGUI.EndChangeCheck()) {
+        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+        t.rect.xMax = newTopRight.x;
+        t.rect.yMax = newTopRight.y;
+        Dirty();
+      }
+
+      EditorGUI.BeginChangeCheck();
+      float3 newTopLeft = Handles.PositionHandle(topLeft, Quaternion.identity);
+
+      if (EditorGUI.EndChangeCheck()) {
+        Undo.RegisterCompleteObjectUndo(t, "Modify rect");
+        t.rect.xMin = newTopLeft.x;
+        t.rect.yMax = newTopLeft.y;
+        Dirty();
+      }
     }
+
+
   }
 
   void Dirty() {
