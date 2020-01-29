@@ -11,18 +11,16 @@ public class RandomDirectionChange2D : MonoBehaviour {
   public float rotationInterval = 1;
   [Tooltip("Maximum degrees of velocity direction rotation per interval")]
   public float maxRotation = 90;
+  public AnimationCurve rotationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
   private float lastRotationChange = float.NegativeInfinity;
-  private Vector3 rotation;
+  private float rotation;
+  private float prevVal;
 
   // Start is called before the first frame update
   void Start() {
     rb = GetComponent<Rigidbody2D>();
-    rotation = new Vector3(
-      Random.Range(-maxRotation, maxRotation),
-      Random.Range(-maxRotation, maxRotation),
-      Random.Range(-maxRotation, maxRotation)
-    );
+    rotation = Random.Range(-maxRotation, maxRotation);
     // Prevent synchronization with others sharing same values
     lastRotationChange = Time.time - Random.Range(0, rotationInterval);
   }
@@ -30,19 +28,15 @@ public class RandomDirectionChange2D : MonoBehaviour {
   // Update is called once per frame
   void FixedUpdate() {
     if (lastRotationChange < Time.time - rotationInterval) {
-      rotation = new Vector3(
-        Random.Range(-maxRotation, maxRotation),
-        Random.Range(-maxRotation, maxRotation),
-        Random.Range(-maxRotation, maxRotation)
-      );
+      rotation = Random.Range(-maxRotation, maxRotation);
       lastRotationChange = Time.time;
+      prevVal = rotationCurve.Evaluate(0);
     }
-    var dt = Time.deltaTime / rotationInterval;
-    var deltaRotation = Quaternion.Euler(
-      rotation.x * dt,
-      rotation.y * dt,
-      rotation.z * dt
-    );
-    rb.velocity = deltaRotation * rb.velocity;
+    var fraction = (Time.time - lastRotationChange) / rotationInterval;
+    var val = rotationCurve.Evaluate(fraction);
+    var diff = val - prevVal;
+    prevVal = val;
+    var deltaRotation = rotation * diff;
+    rb.velocity = Quaternion.Euler(0, 0, deltaRotation) * rb.velocity;
   }
 }

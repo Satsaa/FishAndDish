@@ -223,7 +223,7 @@ public static class VectorExtensions {
 #pragma warning disable CS0618
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetAngle(this Vector2 v, float degrees) => Quaternion.Euler(0, 0, degrees) * new Vector2(v.magnitude, 0);
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetAngleRadians(this Vector2 v, float radians) => Quaternion.EulerAngles(0, 0, radians) * new Vector2(v.magnitude, 0);
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float Angle(this Vector2 v) => math.radians(v.AngleRad());
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float Angle(this Vector2 v) => math.degrees(v.AngleRad());
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float AngleRad(this Vector2 v) => math.atan2(v.x, v.y);
 #pragma warning restore CS0618
 
