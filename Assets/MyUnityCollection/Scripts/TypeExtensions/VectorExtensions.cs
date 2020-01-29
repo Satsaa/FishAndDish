@@ -53,9 +53,9 @@ public static class VectorExtensions {
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetLen(this float2 v, float length) => math.normalize(v) * length;
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetLenSafe(this float2 v, float length, float2 defaultValue = default(float2)) => math.normalizesafe(v, defaultValue) * length;
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetLenSafe(this float2 v, float length, float2 fallbackTarget = default(float2)) => math.normalizesafe(v, fallbackTarget) * length;
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 AddLen(this float2 v, float addition) => math.normalize(v) * (math.length(v) + addition);
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 AddLenSafe(this float2 v, float addition, float2 defaultValue = default(float2)) => math.normalizesafe(v, defaultValue) * (math.length(v) + addition);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 AddLenSafe(this float2 v, float addition, float2 fallbackTarget = default(float2)) => math.normalizesafe(v, fallbackTarget) * (math.length(v) + addition);
 
 
 
@@ -66,7 +66,7 @@ public static class VectorExtensions {
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetDir(this float2 v, float2 d) => math.normalize(d * math.length(v));
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetDirSafe(this float2 v, float2 d, float2 defaultvalue = default(float2)) => math.normalizesafe(d, defaultvalue) * math.length(v);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float2 SetDirSafe(this float2 v, float2 d, float2 fallbackTarget = default(float2)) => math.normalizesafe(d, fallbackTarget) * math.length(v);
 
 
   // *********************** float3 *********************** //
@@ -200,13 +200,13 @@ public static class VectorExtensions {
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetLen(this float3 v, float length) => math.normalize(v) * length;
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetLenSafe(this float3 v, float length, float3 defaultValue = default(float3)) => math.normalizesafe(v, defaultValue) * length;
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetLenSafe(this float3 v, float length, float3 fallbackTarget = default(float3)) => math.normalizesafe(v, fallbackTarget) * length;
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 AddLen(this float3 v, float addition) => math.normalize(v) * (math.length(v) + addition);
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 AddLenSafe(this float3 v, float addition, float3 defaultvalue = default(float3)) => math.normalizesafe(v, defaultvalue) * (math.length(v) + addition);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 AddLenSafe(this float3 v, float addition, float3 fallbackTarget = default(float3)) => math.normalizesafe(v, fallbackTarget) * (math.length(v) + addition);
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetDir(this float3 v, float3 d) => math.normalize(d * math.length(v));
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetDirSafe(this float3 v, float3 d, float3 defaultvalue = default(float3)) => math.normalizesafe(d, defaultvalue) * math.length(v);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float3 SetDirSafe(this float3 v, float3 d, float3 fallbackTarget = default(float3)) => math.normalizesafe(d, fallbackTarget) * math.length(v);
 
   // *********************** Vector2 *********************** //
 
@@ -215,15 +215,15 @@ public static class VectorExtensions {
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetLen(this Vector2 v, float length) => v.normalized * length;
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetLenSafe(this Vector2 v, float length, Vector2 defaultValue) => math.normalizesafe(v, defaultValue) * length;
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetLenSafe(this Vector2 v, float length, Vector2 fallbackTarget) => math.normalizesafe(v, fallbackTarget) * length;
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 AddLen(this Vector2 v, float addition) => v.normalized * (v.magnitude + addition);
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 AddLenSafe(this Vector2 v, float addition, Vector2 defaultValue = default(Vector2)) => math.normalizesafe(v, defaultValue) * (v.magnitude + addition);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 AddLenSafe(this Vector2 v, float addition, Vector2 fallbackTarget = default(Vector2)) => math.normalizesafe(v, fallbackTarget) * (v.magnitude + addition);
 
 
 #pragma warning disable CS0618
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetAngle(this Vector2 v, float degrees) => Quaternion.Euler(0, 0, degrees) * new Vector2(v.magnitude, 0);
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector2 SetAngleRadians(this Vector2 v, float radians) => Quaternion.EulerAngles(0, 0, radians) * new Vector2(v.magnitude, 0);
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float Angle(this Vector2 v) => Vector2.Angle(Vector2.up, v);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float Angle(this Vector2 v) => math.radians(v.AngleRad());
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static float AngleRad(this Vector2 v) => math.atan2(v.x, v.y);
 #pragma warning restore CS0618
 
@@ -303,14 +303,14 @@ public static class VectorExtensions {
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetLen(this Vector3 v, float length) => v.normalized * length;
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetLenSafe(this Vector3 v, float length, Vector3 defaultValue = default(Vector3)) => math.normalizesafe(v, defaultValue) * length;
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetLenSafe(this Vector3 v, float length, Vector3 fallbackTarget = default(Vector3)) => math.normalizesafe(v, fallbackTarget) * length;
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 AddLen(this Vector3 v, float addition) => v.normalized * (v.magnitude + addition);
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 AddLenSafe(this Vector3 v, float addition) => math.normalizesafe(v) * (v.magnitude + addition);
 
 
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetDir(this Vector3 v, Vector3 d) => d.normalized * v.magnitude;
-  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetDirSafe(this Vector3 v, Vector3 d, Vector3 defaultValue = default(Vector3)) => math.normalizesafe(d, defaultValue) * math.length(v);
+  [MethodImpl(MethodImplOptions.AggressiveInlining)] public static Vector3 SetDirSafe(this Vector3 v, Vector3 d, Vector3 fallbackTarget = default(Vector3)) => math.normalizesafe(d, fallbackTarget) * math.length(v);
 
 
 

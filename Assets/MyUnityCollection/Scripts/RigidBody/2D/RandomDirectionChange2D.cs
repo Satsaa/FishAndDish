@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class RandomDirectionChange : MonoBehaviour {
+[RequireComponent(typeof(Rigidbody2D))]
+public class RandomDirectionChange2D : MonoBehaviour {
 
-  private Rigidbody rb;
+  private Rigidbody2D rb;
 
   [Tooltip("Interval of velocity direction rotation")]
   public float rotationInterval = 1;
@@ -17,7 +17,7 @@ public class RandomDirectionChange : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-    rb = GetComponent<Rigidbody>();
+    rb = GetComponent<Rigidbody2D>();
     rotation = new Vector3(
       Random.Range(-maxRotation, maxRotation),
       Random.Range(-maxRotation, maxRotation),
