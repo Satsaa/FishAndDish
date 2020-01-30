@@ -23,6 +23,8 @@ public class FishBehaviour2D : MonoBehaviour {
 
   [Tooltip("The velocity the fish tries to reach")]
   public float ambientSpeed = 0.1f;
+  [Tooltip("Aproach target speed by this fraction per second")]
+  public float speedReachFraction = 0.1f;
 
   [Foldout("Animation Settings", true)]
 
@@ -30,8 +32,14 @@ public class FishBehaviour2D : MonoBehaviour {
   public float tailMultiplier = 0.1f;
   [Tooltip("Reduce tail animation speed by this much per second")]
   public float tailDecay = 0.1f;
-  [Tooltip("Move tail to straight angle this much per second")]
-  public float tailReturnToStraightFraction = 0.1f;
+  [MinMaxRange(0, 5)]
+  [Tooltip("Adjust maxTailAngle based on this range of velocity. MaxTailAngle is multiplied linearly between 0 and 1 based on the relationship of velocity between this range")]
+  public Vector2 tailStraightenRange = new Vector2(0, 0.5f);
+  [Tooltip("The maximum tail rotation in one direction")]
+  public float maxTailAngle = 45f;
+  [Range(0, 1)]
+  public float tailDampening = 0.03f;
+
 
   [Foldout("Burst Settings", true)]
 
@@ -39,13 +47,14 @@ public class FishBehaviour2D : MonoBehaviour {
   public float2 burstSpeed = new float2(0.6f, 1f);
   [Tooltip("The sample curve of burstSpeed")]
   public AnimationCurve burstSampleCurve = AnimationCurve.Linear(0, 0, 1, 1);
-  [Delayed]
   [Tooltip("The maximum amount of bursts the fish can use")]
   public int2 burstsPerUse = 5;
   [Tooltip("The maximum amount of bursts the fish can have")]
-  public int maxBurstsCapacity = 5;
+  public int burstCapacity = 5;
   [Tooltip("The time for a burst to recharge (only 1 burst recharges at a time)")]
   public float2 burstRechargeTime = new float2(0.5f, 1f);
+  [Tooltip("Delay before bursting again")]
+  public float burstDelay = 0.2f;
 
   [Range(0, 1)]
   [Tooltip("The chance of using bursts per second on average")]
@@ -54,21 +63,22 @@ public class FishBehaviour2D : MonoBehaviour {
 
   [Foldout("Debug", true)]
 
-  public int bursts = 0;
+  [SerializeField] private int bursts = 0;
 
-  public float[] speedList;
-
-
+  [SerializeField] private float[] speedList;
 
 
-  private int remainingBursts;
-  private float nextBurstTime = float.NegativeInfinity;
-  private bool bursting;
-  private float targetSpeed = 0.01f;
 
-  private float tailSpeed;
+
+  [SerializeField] private int queuedBursts;
+  [SerializeField] private float nextBurstTime = float.PositiveInfinity;
+  [SerializeField] private float nextBurstRecharge = float.PositiveInfinity;
+  [SerializeField] private float targetSpeed = 0.01f;
+
+  [SerializeField] private float tailSpeed;
   /// <summary> Value used to calculate rotation with math.sin </summary>
-  private float tailAnimationValue;
+  [SerializeField] private float tailSineValue;
+  [SerializeField] private float prevMaxAdjustedAngle;
 
 
   #region Init
@@ -91,11 +101,16 @@ public class FishBehaviour2D : MonoBehaviour {
       }
       prevSpeed = speed;
     }
+    if (rb == null) rb = gameObject.GetComponent<Rigidbody2D>();
+    if (rb != null) {
+      rb.gravityScale = 0;
+      rb.drag = 0;
+    }
   }
 
   // Start is called before the first frame update
   void Start() {
-
+    nextBurstRecharge = Time.time + Random.Range(burstRechargeTime.x, burstRechargeTime.y);
   }
 
   #endregion
@@ -105,22 +120,57 @@ public class FishBehaviour2D : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (Random.value <= DeltaAdjustedChance(burstChance))
+    if (DeltaAdjustedChance(burstChance))
       Use();
+    HandleVelocity();
     HandleBursting();
     AnimateTail();
   }
 
+  void HandleVelocity() {
+    var speed = rb.velocity.magnitude;
+    var diff = targetSpeed - speed;
+
+    float fract = 1 - math.pow(1 - speedReachFraction, Time.deltaTime);
+    var newSpeed = speed + diff * fract;
+    rb.velocity = rb.velocity.SetLenSafe(newSpeed, new Vector2(1, 0));
+    if (speed > targetSpeed || math.abs(diff) < 0.05f) {
+      targetSpeed = ambientSpeed;
+    } else {
+
+    }
+  }
+
   void HandleBursting() {
-    if (!bursting) return;
+    if (Time.time > nextBurstRecharge) {
+      if (bursts < burstCapacity)
+        bursts++;
+      if (bursts < burstCapacity)
+        nextBurstRecharge = Time.time + Random.Range(burstRechargeTime.x, burstRechargeTime.y);
+      else
+        nextBurstRecharge = float.PositiveInfinity;
+    }
+    if (Time.time > nextBurstTime) {
+      Burst();
+      nextBurstRecharge = Time.time + Random.Range(burstRechargeTime.x, burstRechargeTime.y);
+      if (queuedBursts > 0)
+        nextBurstTime = Time.time + burstDelay;
+      else
+        nextBurstTime = float.PositiveInfinity;
+    }
   }
 
   void AnimateTail() {
-    float speedMultiplier = math.pow(1 - tailDecay, Time.deltaTime);
-    tailSpeed *= speedMultiplier;
-    // !!! Wiggle wiggle anim
-
-    float tailRotTowardsStraight = math.pow(1 - tailReturnToStraightFraction, Time.deltaTime);
+    var speed = rb.velocity.magnitude;
+    float decay = math.pow(1 - tailDecay, Time.deltaTime);
+    tailSpeed *= decay;
+    tailSineValue += tailSpeed * Time.deltaTime;
+    var tailAngleMult = (Mathf.InverseLerp(tailStraightenRange.x, tailStraightenRange.y, speed));
+    var maxAdjustedAngle = prevMaxAdjustedAngle + (maxTailAngle * tailAngleMult - prevMaxAdjustedAngle) * tailDampening;
+    var tailAngle = math.sin(tailSineValue * tailMultiplier) * maxAdjustedAngle;
+    Vector3 end = transform.position + transform.right.xy().SetAngle(tailAngle).xyo();
+    prevMaxAdjustedAngle = maxAdjustedAngle;
+    Debug.DrawLine(transform.position, end);
   }
 
   #endregion
@@ -128,16 +178,24 @@ public class FishBehaviour2D : MonoBehaviour {
 
   #region Methods
 
-  public void Use(int bursts = -1) {
-    if (bursts < 0) bursts = UnityEngine.Random.Range(burstsPerUse.x, burstsPerUse.y);
-    remainingBursts += bursts;
-    if (remainingBursts > 0)
-      bursting = true;
+  public void Use(int burstCount = -1) {
+    if (burstCount == -1) burstCount = math.clamp(Random.Range(burstsPerUse.x, burstsPerUse.y), 0, bursts);
+    if (burstCount <= 0) return;
+    if (queuedBursts < 1 && queuedBursts + burstCount > 0) {
+      nextBurstTime = Time.time;
+    }
+    bursts -= burstCount;
+    queuedBursts += burstCount;
+    if (queuedBursts > 0) {
+      nextBurstTime = Time.time + burstDelay;
+    }
   }
 
   public void Burst() {
-    remainingBursts--;
+    queuedBursts--;
+    var prevTargetSpeed = targetSpeed;
     targetSpeed = GetNextSpeed(targetSpeed);
+    tailSpeed += targetSpeed - prevTargetSpeed;
   }
 
   public float GetNextSpeed(float speed) {
