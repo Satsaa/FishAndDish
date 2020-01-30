@@ -13,6 +13,11 @@ public class RandomDirectionChange2D : MonoBehaviour {
   public float maxRotation = 90;
   public AnimationCurve rotationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+  [Tooltip("Scale maximum rotation based on speed off rigidbody")]
+  public bool scaleWithMagnitude;
+  [MyBox.ConditionalField(nameof(scaleWithMagnitude))]
+  public float magnitudeScale = 1;
+
   private float lastRotationChange = float.NegativeInfinity;
   private float rotation;
   private float prevVal;
@@ -28,7 +33,8 @@ public class RandomDirectionChange2D : MonoBehaviour {
   // Update is called once per frame
   void FixedUpdate() {
     if (lastRotationChange < Time.time - rotationInterval) {
-      rotation = Random.Range(-maxRotation, maxRotation);
+      float scale = scaleWithMagnitude ? rb.velocity.magnitude * magnitudeScale : 1;
+      rotation = Random.Range(-maxRotation, maxRotation) * scale;
       lastRotationChange = Time.time;
       prevVal = rotationCurve.Evaluate(0);
     }

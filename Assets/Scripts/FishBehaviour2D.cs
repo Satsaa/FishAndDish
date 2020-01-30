@@ -5,6 +5,9 @@ using Random = UnityEngine.Random;
 using Unity.Mathematics;
 using MyBox;
 using static MyCollection.MyRandom;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -22,8 +25,11 @@ public class FishBehaviour2D : MonoBehaviour {
   [Tooltip("The velocity the fish tries to reach")]
   public float ambientSpeed = 0.1f;
   [Range(0, 1)]
-  [Tooltip("Aproach target speed by this fraction per second")]
-  public float speedReachFraction = 0.1f;
+  [Tooltip("Aproach target speed by this fraction per second (when slowing down)")]
+  public float speedReachFractionDown = 0.1f;
+  [Range(0, 1)]
+  [Tooltip("Aproach target speed by this fraction per second (when speeding up)")]
+  public float speedReachFractionUp = 0.1f;
 
 
   [Foldout("Animation Settings", true)]
@@ -41,7 +47,7 @@ public class FishBehaviour2D : MonoBehaviour {
   public float maxTailAngle = 45f;
   [Range(0, 1)]
   public float tailDampening = 0.03f;
-  public TailBone[] tailBones;
+  public Rotator[] rotators;
 
 
   [Foldout("Burst Settings", true)]
@@ -85,17 +91,20 @@ public class FishBehaviour2D : MonoBehaviour {
   [SerializeField] private float speed;
 
   [System.Serializable]
-  public class TailBone {
+  public class Rotator {
     public float multiplier;
-    public GameObject gameObject;
+    public GameObject go;
     [HideInInspector]
     public float defaultRotation;
+    public float rotation { get => go.transform.localEulerAngles.z; set => go.transform.localEulerAngles = go.transform.localEulerAngles.SetZ(value); }
   }
 
 
   #region Init
 
+#if UNITY_EDITOR
   void OnValidate() {
+    if (PrefabUtility.GetPrefabAssetType(gameObject) != PrefabAssetType.NotAPrefab) return;
     if (burstsPerUse.y == 1) {
       speedList = new float[1] { burstSpeed.y };
     } else {
@@ -120,10 +129,13 @@ public class FishBehaviour2D : MonoBehaviour {
     }
     if (col == null) col = gameObject.GetComponent<Collider2D>();
   }
+#endif
 
   // Start is called before the first frame update
   void Start() {
     nextBurstRecharge = Time.time + Random.Range(burstRechargeTime.x, burstRechargeTime.y);
+    foreach (var rotator in rotators)
+      rotator.defaultRotation = rotator.rotation;
   }
 
   #endregion
@@ -144,7 +156,7 @@ public class FishBehaviour2D : MonoBehaviour {
   void HandleVelocity() {
     var diff = targetSpeed - speed;
 
-    float fract = 1 - math.pow(1 - speedReachFraction, Time.deltaTime);
+    float fract = 1 - math.pow(1 - (diff > 0 ? speedReachFractionUp : speedReachFractionDown), Time.deltaTime);
     var newSpeed = speed + diff * fract;
     rb.velocity = rb.velocity.SetLenSafe(newSpeed, new Vector2(1, 0));
     if (speed > targetSpeed || math.abs(diff) < 0.05f) {
@@ -184,9 +196,8 @@ public class FishBehaviour2D : MonoBehaviour {
     prevMaxAdjustedAngle = maxAdjustedAngle;
     Debug.DrawLine(transform.position, end);
 
-    foreach (var bone in tailBones) {
-      // bone.gameObject.transform.rotation
-    }
+    foreach (var rtr in rotators)
+      rtr.rotation = rtr.defaultRotation + tailAngle * rtr.multiplier;
   }
 
   #endregion
