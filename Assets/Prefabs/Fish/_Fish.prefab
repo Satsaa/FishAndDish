@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 260094501653241273}
   - component: {fileID: 6125399097487307146}
   m_Layer: 0
-  m_Name: DemonFish
+  m_Name: _Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3080787901048101475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.7271547, y: -4.670282, z: 38.95134}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 850380903836007606}
