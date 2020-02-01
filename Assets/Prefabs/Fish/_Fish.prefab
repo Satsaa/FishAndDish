@@ -96,25 +96,28 @@ MonoBehaviour:
   maxTailAngle: 45
   tailDampening: 0.25
   rotators:
-  - multiplier: 0.5
+  - multiplier: 0.45
     go: {fileID: 7537037982763129650}
     defaultRotation: 0
-  - multiplier: 0.45
+  - multiplier: 0.35
     go: {fileID: 1478983149075329388}
     defaultRotation: 0
-  - multiplier: 0.4
+  - multiplier: 0.25
     go: {fileID: 3886956587380423992}
     defaultRotation: 0
-  - multiplier: 0.35
+  - multiplier: 0.15
     go: {fileID: 1924042247042220417}
     defaultRotation: 0
-  - multiplier: 0.3
+  - multiplier: 0
+    go: {fileID: 6335184428346389973}
+    defaultRotation: 0
+  - multiplier: 0.025
     go: {fileID: 8870434957143324154}
     defaultRotation: 0
-  - multiplier: 0.25
+  - multiplier: 0.05
     go: {fileID: 7433290936957087103}
     defaultRotation: 0
-  - multiplier: 0.15
+  - multiplier: 0.075
     go: {fileID: 4428106822740729032}
     defaultRotation: 0
   - multiplier: 0.1
@@ -185,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c6c20b3e06cc14f8092a01703498ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 180}
+  offset: {x: 0, y: 0, z: 0}
   lookRotation: 0
   lerpTime: 0.025
 --- !u!114 &6125399097487307146
@@ -200,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a10315d05db56540bf9c0d12e028ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationInterval: 0.05
-  maxRotation: 5
+  rotationInterval: 0.5
+  maxRotation: 25
   rotationCurve:
     serializedVersion: 2
     m_Curve:
@@ -355,6 +358,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 84fe7a2f41442ae418ccea8715e3f4de, type: 2}
+    - target: {fileID: 2489302850876048126, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f,
+        type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 6115704988364361998}
+    - target: {fileID: 2489302850876048126, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f, type: 3}
 --- !u!4 &850380903836007606 stripped
@@ -384,6 +397,18 @@ GameObject:
 --- !u!1 &3348349756109755836 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2251757485343768048, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672173932811261868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6335184428346389973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7395890735391825287, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672173932811261868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6115704988364361998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7320384129194211678, guid: 1ba3ca0d77a9ade46ada700d6aecfe5f,
     type: 3}
   m_PrefabInstance: {fileID: 5672173932811261868}
   m_PrefabAsset: {fileID: 0}
