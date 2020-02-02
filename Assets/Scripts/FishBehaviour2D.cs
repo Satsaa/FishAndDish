@@ -123,10 +123,6 @@ public class FishBehaviour2D : MonoBehaviour {
       prevSpeed = listedSpeed;
     }
     if (rb == null) rb = gameObject.GetComponent<Rigidbody2D>();
-    if (rb != null) {
-      rb.gravityScale = 0;
-      rb.drag = 0;
-    }
     if (col == null) col = gameObject.GetComponent<Collider2D>();
   }
 #endif

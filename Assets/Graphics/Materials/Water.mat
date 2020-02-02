@@ -64,9 +64,19 @@ Material:
     m_Floats:
     - AngleValue: -0.15
     - EffectPower: 1.8
-    - NoiseScale: 26.24
+    - NoiseScale: 60
+    - RayAngle: -0.125
+    - RayDensity: 60
+    - RayLength: 0.725
+    - RayPower: 5
+    - RayTimeScale: 0.02
+    - ShadePower: 8.54
     - TimeScale: 0.01
     - TopShadePower: 8
+    - WaveDensity: 15
+    - WaveHeight: -0.04
+    - WaveXTimeScale: 0.1
+    - WaveYTimeScale: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -89,10 +99,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BottomColor: {r: 0, g: 0.18060637, b: 1, a: 0}
+    - BottomColor: {r: 0, g: 0.18039227, b: 1, a: 0}
     - RayColor: {r: 0, g: 1.0196079, b: 2, a: 1}
     - ShadeColor: {r: 0.21226418, g: 0.7338029, b: 1, a: 1}
-    - TopColor: {r: 0, g: 0.045106113, b: 0.254717, a: 0.3137255}
+    - TopColor: {r: 0, g: 0.1764706, b: 0.7490196, a: 0.23921569}
+    - WaveTimeScale: {r: 0.05, g: 0.05, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
