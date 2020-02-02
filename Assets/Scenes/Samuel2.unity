@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -814,6 +814,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.55}
   m_EdgeRadius: 0
+--- !u!1 &2109074362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2109074362, guid: b9e4ccb167404434e8bb898c3f6877cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5533446631307867618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!253 &2109074365
+BuoyancyEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109074362}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_SurfaceLevel: 4
+  m_Density: 2.25
+  m_LinearDrag: 5
+  m_AngularDrag: 5
+  m_FlowAngle: 0
+  m_FlowMagnitude: 0
+  m_FlowVariation: 0
 --- !u!1 &2124925438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2880126256423276065, guid: 6a1c355556e2dbc41a76b1ffc6e66dbf,
@@ -961,7 +986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109074363, guid: b9e4ccb167404434e8bb898c3f6877cd, type: 3}
       propertyPath: m_UsedByEffector
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2109074363, guid: b9e4ccb167404434e8bb898c3f6877cd, type: 3}
       propertyPath: m_IsTrigger
