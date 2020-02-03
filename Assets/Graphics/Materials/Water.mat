@@ -99,10 +99,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BottomColor: {r: 0, g: 0.18039227, b: 1, a: 0}
-    - RayColor: {r: 0, g: 1.0196079, b: 2, a: 1}
-    - ShadeColor: {r: 0.21226418, g: 0.7338029, b: 1, a: 1}
-    - TopColor: {r: 0, g: 0.1764706, b: 0.7490196, a: 0.23921569}
+    - BottomColor: {r: 0.017257923, g: 0, b: 0.24528301, a: 0}
+    - RayColor: {r: 0, g: 0, b: 0, a: 1}
+    - ShadeColor: {r: 0, g: 0.15695004, b: 0.4433962, a: 1}
+    - TopColor: {r: 0, g: 0.3084356, b: 0.7264151, a: 0.23921569}
     - WaveTimeScale: {r: 0.05, g: 0.05, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
