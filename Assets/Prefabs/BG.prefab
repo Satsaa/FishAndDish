@@ -519,9 +519,9 @@ BuoyancyEffector2D:
     serializedVersion: 2
     m_Bits: 512
   m_SurfaceLevel: 4
-  m_Density: 2.2403965
-  m_LinearDrag: 0.25
-  m_AngularDrag: 0.05
+  m_Density: 2
+  m_LinearDrag: 20
+  m_AngularDrag: 0
   m_FlowAngle: 0
   m_FlowMagnitude: 0
   m_FlowVariation: 0
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 2109074366}
   - component: {fileID: 2109074365}
   m_Layer: 4
-  m_Name: WaterEffector
+  m_Name: WaterEffector (Fish)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
