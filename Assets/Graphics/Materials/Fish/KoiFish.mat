@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YellowFish 4
+  m_Name: KoiFish
   m_Shader: {fileID: -6465566751694194690, guid: 3b31ed6641915f049967ab476908bd5a,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 39974856cc39aa942a123926c384c834, type: 3}
+        m_Texture: {fileID: 2800000, guid: 82ec8c8284dba0942b7426e32a7e44a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
