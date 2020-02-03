@@ -65,12 +65,12 @@ PrefabInstance:
     - target: {fileID: 3080787901048101475, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Name
-      value: YellowFish
+      value: CallOfDutyFish
       objectReference: {fileID: 0}
     - target: {fileID: 7799209683967251794, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 49d65b6579a5e1b4ab89485a633b71ea, type: 2}
+      objectReference: {fileID: 2100000, guid: 44e8d1189ad4097489cba5c026e8e70f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b749c280280ee4c923ec5bd1ef0cce, type: 3}
