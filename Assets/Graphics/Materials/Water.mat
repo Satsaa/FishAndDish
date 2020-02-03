@@ -69,7 +69,7 @@ Material:
     - RayDensity: 60
     - RayLength: 0.725
     - RayPower: 5
-    - RayTimeScale: 0.02
+    - RayTimeScale: 0.009
     - ShadePower: 8.54
     - TimeScale: 0.01
     - TopShadePower: 8
@@ -99,11 +99,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BottomColor: {r: 0.017257923, g: 0, b: 0.24528301, a: 0}
-    - RayColor: {r: 0, g: 0, b: 0, a: 1}
-    - ShadeColor: {r: 0, g: 0.15695004, b: 0.4433962, a: 1}
+    - BottomColor: {r: 0, g: 0, b: 0, a: 0}
+    - RayColor: {r: 0, g: 3.609823, b: 11.320755, a: 1}
+    - ShadeColor: {r: 0, g: 0.3472073, b: 1.9294118, a: 1}
     - TopColor: {r: 0, g: 0.3084356, b: 0.7264151, a: 0.23921569}
-    - WaveTimeScale: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - WaveTimeScale: {r: 0.03, g: 0.02, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
