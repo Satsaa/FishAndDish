@@ -62,15 +62,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3080787901048101475, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Name
-      value: YellowFish
+      value: SweetFish
       objectReference: {fileID: 0}
     - target: {fileID: 7799209683967251794, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 49d65b6579a5e1b4ab89485a633b71ea, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aee4c5a91d20842b184293b763255c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b749c280280ee4c923ec5bd1ef0cce, type: 3}

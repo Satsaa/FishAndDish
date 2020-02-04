@@ -62,15 +62,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3080787901048101475, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Name
-      value: YellowFish
+      value: BlueMarlinFish
       objectReference: {fileID: 0}
     - target: {fileID: 7799209683967251794, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 49d65b6579a5e1b4ab89485a633b71ea, type: 2}
+      objectReference: {fileID: 2100000, guid: 39d131e88f7209846b3a6491dd7aad42, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b749c280280ee4c923ec5bd1ef0cce, type: 3}

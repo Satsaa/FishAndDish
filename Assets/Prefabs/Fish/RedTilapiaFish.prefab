@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.152215
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21716833
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
@@ -64,13 +64,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 355738247529328203, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.33333334
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
@@ -80,47 +80,12 @@ PrefabInstance:
     - target: {fileID: 3080787901048101475, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Name
-      value: EelFish
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[0].multiplier
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[1].multiplier
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[2].multiplier
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[3].multiplier
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[5].multiplier
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[6].multiplier
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167133703010761443, guid: 06b749c280280ee4c923ec5bd1ef0cce,
-        type: 3}
-      propertyPath: rotators.Array.data[7].multiplier
-      value: -0.75
+      value: RedTilapiaFish
       objectReference: {fileID: 0}
     - target: {fileID: 7799209683967251794, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0c3566396bab9a74096b55438a6975b3, type: 2}
+      objectReference: {fileID: 2100000, guid: 8c811e5ae31e377489cf9cf8836274f8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b749c280280ee4c923ec5bd1ef0cce, type: 3}
