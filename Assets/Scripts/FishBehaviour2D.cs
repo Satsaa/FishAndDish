@@ -145,7 +145,6 @@ public class FishBehaviour2D : MonoBehaviour {
     var tailAngle = math.sin(tailSineValue * tailMultiplier) * maxAdjustedAngle;
     Vector3 end = transform.position + transform.right.xy().SetAngle(tailAngle).xyo();
     prevMaxAdjustedAngle = maxAdjustedAngle;
-    Debug.DrawLine(transform.position, end);
 
     foreach (var rtr in rotators)
       rtr.rotation = rtr.defaultRotation + tailAngle * rtr.multiplier;

@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 691424800337501734, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1.118284
+      objectReference: {fileID: 0}
     - target: {fileID: 850380903836007606, guid: 06b749c280280ee4c923ec5bd1ef0cce,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -96,6 +101,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DemonFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158794151112875554, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158794151112875554, guid: 06b749c280280ee4c923ec5bd1ef0cce,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.74
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b749c280280ee4c923ec5bd1ef0cce, type: 3}

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quitgame : MonoBehaviour{
-    public void QuitGame() {
-
-        Debug.Log("QUIT!");
-        Application.Quit();
-    }
-    
+public class QuitGame : MonoBehaviour {
+  public void Quit() {
+    Debug.Log("QUIT!");
+    Application.Quit();
+  }
 }
