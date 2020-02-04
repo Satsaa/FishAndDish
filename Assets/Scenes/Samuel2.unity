@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 582695452}
   - component: {fileID: 582695454}
   - component: {fileID: 582695453}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: LineEnd
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -313,14 +313,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 88260456100414951}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1603662522
+--- !u!222 &1603662523
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603662521}
+  m_CullTransparentMesh: 0
+--- !u!114 &1603662525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603662521}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -341,14 +349,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &1603662523
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603662521}
-  m_CullTransparentMesh: 0
 --- !u!1 &1723227312
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.73
+  m_Radius: 1.78
 --- !u!50 &2069840380
 Rigidbody2D:
   serializedVersion: 4
@@ -649,6 +649,18 @@ PrefabInstance:
       propertyPath: lineEnd
       value: 
       objectReference: {fileID: 582695452}
+    - target: {fileID: 1603662523, guid: fd29a4ae458ba06438450a7de3f4eaf6, type: 3}
+      propertyPath: action
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603662523, guid: fd29a4ae458ba06438450a7de3f4eaf6, type: 3}
+      propertyPath: throwVelocity.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603662523, guid: fd29a4ae458ba06438450a7de3f4eaf6, type: 3}
+      propertyPath: throwVelocity.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 88260455790639305, guid: fd29a4ae458ba06438450a7de3f4eaf6,
         type: 3}
       propertyPath: m_Name

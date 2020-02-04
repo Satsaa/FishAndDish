@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FisherManHandling : MonoBehaviour {
+public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
   public GameObject[] fishUIElement;
   public float defaultDistance = 1;
   public float distance = 1;
@@ -35,18 +36,16 @@ public class FisherManHandling : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (pressing) {
-      if (!Input.GetMouseButton(0)) {
-        pressing = false;
-        Update();
-        return;
-      }
       switch (action) {
         case Action.charge:
           print(1);
           joint.enabled = true;
           if (chargeStartTime == float.PositiveInfinity) {
-            if (chargeStartTime + maxChargeDuration > Time.time) pressing = false;
-            chargeStartTime = Time.time;
+            if (chargeStartTime + maxChargeDuration > Time.time) {
+              chargeStartTime = Time.time;
+            } else if (chargeStartTime + maxChargeDuration < Time.time) {
+              pressing = false;
+            }
           }
           break;
         case Action.reel:
@@ -121,8 +120,12 @@ public class FisherManHandling : MonoBehaviour {
     }
   }
 
-  public void TakeInput() {
+  public void OnPointerDown(PointerEventData eventData) {
     pressing = true;
+  }
+
+  public void TakeInput() {
+    pressing = false;
   }
 
   void ShowFishInList(string name) {
