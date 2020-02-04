@@ -678,8 +678,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffc5f029ebefb84789057c8c7f8e8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnables: []
-  maxSpawns: 6
+  spawnables:
+  - prefab: {fileID: 5174127317372799919, guid: 817fb407a1674e648af719eee26a5703,
+      type: 3}
+    weight: 0.5
+  - prefab: {fileID: 5174127317372799919, guid: f48f27ab2f9025345b63c276f1e3760d,
+      type: 3}
+    weight: 0.5
+  - prefab: {fileID: 5174127317372799919, guid: 853e9292ee3242d43a811d8027881bde,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: 20afa0414de172d4e9a40f33bc3a2072,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: 146c789d0106b7743a2c07a5c522769d,
+      type: 3}
+    weight: 0.8
+  - prefab: {fileID: 2716020566415002306, guid: 741ead91af80b9c4b8b21b4c81387a31,
+      type: 3}
+    weight: 0.25
+  - prefab: {fileID: 5174127317372799919, guid: 3b7d8289c65e400439fd2255a6d206ae,
+      type: 3}
+    weight: 0.4
+  - prefab: {fileID: 5174127317372799919, guid: 8f67450ad8190b649bf6566a87fe0800,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: 1aadf2b692ec16049a627d19b559c3ef,
+      type: 3}
+    weight: 0.6
+  - prefab: {fileID: 5174127317372799919, guid: f09b3952c6c778641b74ef18988cbdf7,
+      type: 3}
+    weight: 0.5
+  - prefab: {fileID: 5174127317372799919, guid: cb088f96e59e1174699f72f83bf9c46a,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: d9bb091008e40de4f93b5f41f6ec7852,
+      type: 3}
+    weight: 0.7
+  - prefab: {fileID: 5174127317372799919, guid: 7b8eb0cebe075b9499c40adde91378bb,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: e84ecd09168a7eb41803663b2f90c606,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: e84ee2a74c70d4a4dab9274df497cab5,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 5174127317372799919, guid: a17fbbb359124344f84c53cf73600848,
+      type: 3}
+    weight: 0.7
+  - prefab: {fileID: 5174127317372799919, guid: db6cca44a3e8f9440a427f70235cedfa,
+      type: 3}
+    weight: 0.4
+  - prefab: {fileID: 5174127317372799919, guid: 86e78dd514aa34b428d07b3c86da58bf,
+      type: 3}
+    weight: 1
+  maxSpawns: 7
   spawnDelay:
     x: 3
     y: 10
@@ -694,7 +748,6 @@ GameObject:
   - component: {fileID: 1936442199}
   - component: {fileID: 1936442202}
   - component: {fileID: 1936442201}
-  - component: {fileID: 1936442200}
   m_Layer: 4
   m_Name: WaterEffector (Lure)
   m_TagString: Untagged
@@ -761,18 +814,6 @@ BuoyancyEffector2D:
   m_FlowAngle: 0
   m_FlowMagnitude: 0
   m_FlowVariation: 0
---- !u!114 &1936442200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936442198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8306248f3b6d28e47bf1abac3c4df204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2109074362
 GameObject:
   m_ObjectHideFlags: 0

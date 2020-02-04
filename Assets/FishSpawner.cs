@@ -20,7 +20,7 @@ public class FishSpawner : MonoBehaviour {
   [System.Serializable]
   public class Spawnable {
     public GameObject prefab;
-    public int weight = 1;
+    public float weight = 1;
   }
 
   // Start is called before the first frame update
@@ -43,17 +43,19 @@ public class FishSpawner : MonoBehaviour {
   }
 
   void SpawnFish() {
-    var totalWeight = 0;
+    nextSpawn = float.PositiveInfinity;
+    var totalWeight = 0f;
     foreach (var spwn in spawnables) {
       totalWeight += spwn.weight;
     }
     var rand = Random.Range(0, totalWeight);
-    var currentWeight = 0;
+    var currentWeight = 0f;
     foreach (var spwn in spawnables) {
       if (rand > currentWeight && rand <= currentWeight + spwn.weight) {
         var fish = Instantiate(spwn.prefab, GetRandomPos(bc.bounds), Quaternion.identity);
         fishCount++;
         fish.GetComponent<FishBehaviour2D>().nextBurstTime = Time.time;
+        fish.GetComponent<Rigidbody2D>().velocity = Vector3.right;
         return;
       }
       totalWeight += currentWeight;
