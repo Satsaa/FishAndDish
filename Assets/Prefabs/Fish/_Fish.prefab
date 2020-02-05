@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationInterval: 0.05
-  maxRotation: 25
+  maxRotation: 2.5
   rotationCurve:
     serializedVersion: 2
     m_Curve:

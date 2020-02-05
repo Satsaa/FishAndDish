@@ -43,9 +43,10 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           if (chargeStartTime == float.PositiveInfinity) {
             if (chargeStartTime + maxChargeDuration > Time.time) {
               chargeStartTime = Time.time;
-            } else if (chargeStartTime + maxChargeDuration < Time.time) {
-              pressing = false;
             }
+          }
+          if (chargeStartTime + maxChargeDuration < Time.time) {
+            pressing = false;
           }
           break;
         case Action.reel:
@@ -57,7 +58,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           animator.Play("Reel");
           distance -= reelSpeed * Time.deltaTime;
           joint.distance = defaultDistance;
-          lure.Attach();
+          lure.TryAttach();
           if (distance < catchDistance) {
             pressing = false;
             action = Action.charge;
@@ -83,6 +84,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           joint.distance = defaultDistance;
           animator.Play("FishingIdle");
           ShowFishInList(lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name);
+          Destroy(lure.attached.gameObject);
           break;
       }
     } else {
@@ -104,6 +106,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           animator.Play("FishingIdle");
           break;
         case Action.fishReel:
+          print(7);
           if (lure.joint.attachedRigidbody == null) {
             action = Action.reel;
             return;
@@ -111,10 +114,11 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           animator.Play("Struggle");
           break;
         case Action.confirm:
-          print(7);
+          print(8);
           joint.distance = defaultDistance;
           animator.Play("FishingIdle");
           ShowFishInList(lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name);
+          Destroy(lure.attached.gameObject);
           break;
       }
     }

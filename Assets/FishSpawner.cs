@@ -58,7 +58,7 @@ public class FishSpawner : MonoBehaviour {
         fish.GetComponent<Rigidbody2D>().velocity = Vector3.right;
         return;
       }
-      totalWeight += currentWeight;
+      currentWeight += spwn.weight;
     }
   }
 
