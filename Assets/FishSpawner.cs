@@ -36,7 +36,7 @@ public class FishSpawner : MonoBehaviour {
   void Update() {
     if (nextSpawn == float.PositiveInfinity) {
       if (fishCount < maxSpawns)
-        nextSpawn = Random.Range(spawnDelay.x, spawnDelay.y);
+        nextSpawn = Time.time + Random.Range(spawnDelay.x, spawnDelay.y);
     } else if (Time.time >= nextSpawn) {
       SpawnFish();
     }

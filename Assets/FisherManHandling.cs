@@ -15,7 +15,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
   public Vector2 throwVelocity = new Vector2(-1, 1);
   public float maxChargeDuration = 2;
   public Lure lure;
-  public DistanceJoint2D joint;
+  public DistanceJoint2D lineJoint;
   public Transform lineStart;
   public Transform lineEnd;
 
@@ -28,18 +28,24 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
     fishReel,
     confirm, // Confirm you caught fish
   }
+
+  private float defaultDensity;
+
   // Start is called before the first frame update
   void Start() {
-
+    defaultDensity = lineEnd.GetComponent<Collider2D>().density;
   }
 
   // Update is called once per frame
   void Update() {
-    if (pressing) {
-      switch (action) {
-        case Action.charge:
-          print(1);
-          joint.enabled = true;
+    switch (action) {
+      case Action.charge:
+        lineEnd.GetComponent<Collider2D>().density *= 1 + 1 * Time.deltaTime;
+        lineJoint.distance = defaultDistance;
+        distance = defaultDistance;
+        if (pressing) {
+          animator.Play("Throw");
+          print(action + " " + pressing);
           if (chargeStartTime == float.PositiveInfinity) {
             if (chargeStartTime + maxChargeDuration > Time.time) {
               chargeStartTime = Time.time;
@@ -48,79 +54,103 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           if (chargeStartTime + maxChargeDuration < Time.time) {
             pressing = false;
           }
-          break;
-        case Action.reel:
-          print(2);
-          if (joint.enabled == false) {
-            joint.enabled = true;
-            joint.distance = Vector2.Distance(lineStart.transform.position, lineEnd.transform.position);
+        } else {
+
+          print(action + " " + pressing);
+          if (chargeStartTime == float.PositiveInfinity) {
+            lineJoint.enabled = true;
+            animator.Play("FishingIdle");
+            chargeStartTime = float.PositiveInfinity;
+          } else {
+            lineJoint.enabled = false;
+            action = Action.reel;
+            lineEnd.GetComponent<Collider2D>().density = defaultDensity;
+            lure.GetComponent<Rigidbody2D>().velocity += throwVelocity * Mathf.Clamp01((Time.time - chargeStartTime) / maxChargeDuration);
+            chargeStartTime = float.PositiveInfinity;
+          }
+        }
+        break;
+
+      case Action.reel:
+        if (pressing) {
+          lineEnd.GetComponent<Collider2D>().density = defaultDensity * 10;
+          lineJoint.enabled = true;
+          print(action + " " + pressing);
+          if (lineJoint.enabled == false) {
+            lineJoint.enabled = true;
+            lineJoint.distance = Vector2.Distance(lineStart.transform.position, lineEnd.transform.position);
+            distance = lineJoint.distance;
           }
           animator.Play("Reel");
           distance -= reelSpeed * Time.deltaTime;
-          joint.distance = defaultDistance;
-          lure.TryAttach();
-          if (distance < catchDistance) {
+          lineJoint.distance = distance;
+          if (lure.TryAttach()) {
+            action = Action.fishReel;
+          } else if (distance <= catchDistance) {
             pressing = false;
             action = Action.charge;
           }
-          break;
-        case Action.fishReel:
-          print(3);
+        } else {
+          lineEnd.GetComponent<Collider2D>().density = defaultDensity;
+          lineJoint.enabled = false;
+          lineJoint.distance = Vector2.Distance(lineStart.transform.position, lineEnd.transform.position);
+          distance = lineJoint.distance;
+          print(action + " " + pressing);
+          animator.Play("FishingIdle");
+        }
+        break;
+
+      case Action.fishReel:
+        if (pressing) {
+
+          print(action + " " + pressing);
           if (lure.joint.attachedRigidbody == null) {
             action = Action.reel;
             return;
           }
           animator.Play("HardReel");
           distance -= fishReelSpeed * Time.deltaTime;
-          joint.distance = defaultDistance;
-          if (distance < catchDistance) {
-            pressing = false;
-            action = Action.confirm;
-            ShowFishInList(lure.attached.GetComponent<SkinnedMeshRenderer>().material.name);
+          lineJoint.distance = distance;
+          if (distance <= catchDistance) {
+            distance = catchDistance;
+            lineEnd.GetComponent<Collider2D>().density += 1 * Time.deltaTime;
+            if (lure.attached == null || Vector2.Distance(lineStart.transform.position, lineEnd.transform.position) <= catchDistance) {
+              pressing = false;
+              action = Action.confirm;
+              animator.Play("FishingIdle");
+            }
           }
-          break;
-        case Action.confirm:
-          print(4);
-          joint.distance = defaultDistance;
-          animator.Play("FishingIdle");
-          ShowFishInList(lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name);
-          Destroy(lure.attached.gameObject);
-          break;
-      }
-    } else {
-      switch (action) {
-        case Action.charge:
-          print(5);
-          joint.enabled = true;
-          if (chargeStartTime != float.PositiveInfinity) {
-            animator.Play("Throw");
-            joint.enabled = false;
-            action = Action.reel;
-            lure.GetComponent<Rigidbody2D>().velocity += throwVelocity * Mathf.Clamp01((Time.time - chargeStartTime) / maxChargeDuration);
+        } else {
 
-            chargeStartTime = float.PositiveInfinity;
-          }
-          break;
-        case Action.reel:
-          print(6);
-          animator.Play("FishingIdle");
-          break;
-        case Action.fishReel:
-          print(7);
+          print(action + " " + pressing);
           if (lure.joint.attachedRigidbody == null) {
             action = Action.reel;
             return;
           }
           animator.Play("Struggle");
-          break;
-        case Action.confirm:
-          print(8);
-          joint.distance = defaultDistance;
-          animator.Play("FishingIdle");
-          ShowFishInList(lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name);
+        }
+        break;
+
+      case Action.confirm:
+        if (lure.attached == null) {
+          action = Action.charge;
+          return;
+        }
+        if (pressing) {
+          print(action + " " + pressing);
+          print(lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name.Replace(" (Instance)", ""));
+          ShowFishInList((lure.attached.GetComponentInChildren<SkinnedMeshRenderer>().material.name.Replace(" (Instance)", "")));
+          GameObject.FindObjectOfType<FishSpawner>().fishCount--;
           Destroy(lure.attached.gameObject);
-          break;
-      }
+          action = Action.charge;
+          chargeStartTime = float.PositiveInfinity;
+          lineJoint.distance = defaultDistance;
+          distance = defaultDistance;
+          pressing = false;
+        } else {
+          print(action + " " + pressing);
+        }
+        break;
     }
   }
 

@@ -87,10 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowVelocityChange: 1
   ambientSpeed: 0.2
-  tailMultiplier: 10
+  tailMultiplier: 5
   tailDecay: 0.2
   useTailDecay: 1
-  maxAngle: 45
+  maxAngle: 77
   tailStraightenRange: {x: 0.09590792, y: 0.6012588}
   tailDampening: 0.25
   rotators:

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Lure : MonoBehaviour {
   [HideInInspector]
   public FishBehaviour2D attached;
+  public DistanceJoint2D jointBase;
+  [HideInInspector]
   public DistanceJoint2D joint;
   public ContactFilter2D filter;
   // Start is called before the first frame update
@@ -14,23 +16,30 @@ public class Lure : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (joint.attachedRigidbody == null) {
+    if (joint == null) {
+      joint = joint.CopyComponent(gameObject);
+      if (attached != null)
+        attached.GetComponent<FaceVelocity2D>().enabled = true;
       attached = null;
+      joint.enabled = false;
     }
   }
 
-  public void TryAttach() {
+  public bool TryAttach() {
     if (attached == null) {
       var res = new List<Collider2D>();
       GetComponent<Rigidbody2D>().OverlapCollider(filter, res);
       foreach (var item in res) {
         if (item.GetComponent<FishBehaviour2D>() != null) {
           attached = item.GetComponent<FishBehaviour2D>();
-          joint.connectedAnchor = attached.transform.position;
+          attached.GetComponent<FaceVelocity2D>().enabled = false;
+          // joint.connectedAnchor = attached.transform.position;
           joint.connectedBody = attached.GetComponent<Rigidbody2D>();
-          break;
+          joint.enabled = true;
+          return true;
         }
       }
     }
+    return false;
   }
 }
