@@ -462,7 +462,7 @@ PrefabInstance:
     - target: {fileID: 1780831811296069778, guid: 895876e1a9730104f823e060946a6a06,
         type: 3}
       propertyPath: orthographic size
-      value: 5.5110154
+      value: 5.3429255
       objectReference: {fileID: 0}
     - target: {fileID: 1780831811296069778, guid: 895876e1a9730104f823e060946a6a06,
         type: 3}
@@ -1382,6 +1382,11 @@ PrefabInstance:
       propertyPath: lineJoint
       value: 
       objectReference: {fileID: 675569531}
+    - target: {fileID: 890809550778014592, guid: fd29a4ae458ba06438450a7de3f4eaf6,
+        type: 3}
+      propertyPath: maxDensity
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd29a4ae458ba06438450a7de3f4eaf6, type: 3}
 --- !u!1001 &5533446631307867618

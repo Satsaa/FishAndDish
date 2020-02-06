@@ -18,6 +18,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
   public DistanceJoint2D lineJoint;
   public Transform lineStart;
   public Transform lineEnd;
+  public float maxDensity = 50;
 
   public bool pressing = false;
   public float chargeStartTime = float.PositiveInfinity;
@@ -40,7 +41,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
   void Update() {
     switch (action) {
       case Action.charge:
-        lineEnd.GetComponent<Collider2D>().density *= 1 + 1 * Time.deltaTime;
+        lineEnd.GetComponent<Collider2D>().density = Mathf.Min(maxDensity, lineEnd.GetComponent<Collider2D>().density * (1 + 1 * Time.deltaTime));
         lineJoint.distance = defaultDistance;
         distance = defaultDistance;
         if (pressing) {
@@ -73,7 +74,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
 
       case Action.reel:
         if (pressing) {
-          lineEnd.GetComponent<Collider2D>().density = defaultDensity * 10;
+          lineEnd.GetComponent<Collider2D>().density = Mathf.Min(maxDensity, defaultDensity * 10);
           lineJoint.enabled = true;
           print(action + " " + pressing);
           if (lineJoint.enabled == false) {
@@ -113,7 +114,7 @@ public class FisherManHandling : MonoBehaviour, IPointerDownHandler {
           lineJoint.distance = distance;
           if (distance <= catchDistance) {
             distance = catchDistance;
-            lineEnd.GetComponent<Collider2D>().density += 1 * Time.deltaTime;
+            lineEnd.GetComponent<Collider2D>().density = Mathf.Min(maxDensity, lineEnd.GetComponent<Collider2D>().density + 1 * Time.deltaTime);
             if (lure.attached == null || Vector2.Distance(lineStart.transform.position, lineEnd.transform.position) <= catchDistance) {
               pressing = false;
               action = Action.confirm;
