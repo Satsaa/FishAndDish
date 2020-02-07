@@ -36,7 +36,7 @@ public class FishSpawner : MonoBehaviour {
   void Update() {
     if (nextSpawn == float.PositiveInfinity) {
       if (fishCount < maxSpawns)
-        nextSpawn = Random.Range(spawnDelay.x, spawnDelay.y);
+        nextSpawn = Time.time + Random.Range(spawnDelay.x, spawnDelay.y);
     } else if (Time.time >= nextSpawn) {
       SpawnFish();
     }
@@ -58,7 +58,7 @@ public class FishSpawner : MonoBehaviour {
         fish.GetComponent<Rigidbody2D>().velocity = Vector3.right;
         return;
       }
-      totalWeight += currentWeight;
+      currentWeight += spwn.weight;
     }
   }
 

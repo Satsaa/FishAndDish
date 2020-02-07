@@ -302,10 +302,10 @@ AreaEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_UseGlobalAngle: 1
-  m_ForceAngle: 0
-  m_ForceMagnitude: 1
+  m_ForceAngle: 90
+  m_ForceMagnitude: 0.5
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_Drag: 0
@@ -507,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683034070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.83, y: -1.98, z: -5147.5625}
+  m_LocalPosition: {x: -12.7, y: -1.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8998310838300648820}
@@ -634,7 +634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850766491}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.8, y: -1.98, z: -5147.5625}
+  m_LocalPosition: {x: -10.8, y: -1.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8998310838300648820}
@@ -650,7 +650,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 1936442199}
   - component: {fileID: 1936442202}
   - component: {fileID: 1936442201}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: WaterEffector (Lure)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 8}
+  m_Size: {x: 30.1, y: 8}
   m_EdgeRadius: 0
 --- !u!253 &1936442201
 BuoyancyEffector2D:
@@ -803,12 +803,12 @@ BuoyancyEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936442198}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 512
   m_SurfaceLevel: 4
-  m_Density: 2
+  m_Density: 32
   m_LinearDrag: 20
   m_AngularDrag: 0
   m_FlowAngle: 0
@@ -871,7 +871,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 8}
+  m_Size: {x: 30.1, y: 8}
   m_EdgeRadius: 0
 --- !u!253 &2109074366
 BuoyancyEffector2D:

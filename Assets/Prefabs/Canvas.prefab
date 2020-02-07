@@ -7182,7 +7182,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1603662522}
   - component: {fileID: 1603662524}
+  - component: {fileID: 890809550778014592}
   - component: {fileID: 1603662523}
+  - component: {fileID: 1603662525}
   m_Layer: 5
   m_Name: InputEater + ManHandler
   m_TagString: Untagged
@@ -7251,19 +7253,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1603662523}
-        m_MethodName: TakeInput
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1603662523
+      m_Calls: []
+--- !u!114 &890809550778014592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7294,19 +7285,57 @@ MonoBehaviour:
   - {fileID: 2076628499}
   - {fileID: 2068486587}
   - {fileID: 95870446}
-  defaultDistance: 1
-  distance: 1
-  reelSpeed: 1
-  fishReelSpeed: 0.5
-  catchDistance: 1
-  action: 1
+  defaultDistance: 0.5
+  distance: 0.5
+  reelSpeed: 2
+  fishReelSpeed: 1
+  catchDistance: 0.5
+  action: 0
   animator: {fileID: 0}
-  throwVelocity: {x: -1, y: 1}
+  throwVelocity: {x: -9, y: 5}
   maxChargeDuration: 2
   lure: {fileID: 0}
   joint: {fileID: 0}
   lineStart: {fileID: 0}
   lineEnd: {fileID: 0}
+  pressing: 0
+  chargeStartTime: Infinity
+--- !u!222 &1603662523
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603662521}
+  m_CullTransparentMesh: 0
+--- !u!114 &1603662525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603662521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1620737997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8591,7 +8620,7 @@ GameObject:
   - component: {fileID: 1937493398}
   - component: {fileID: 1937493397}
   - component: {fileID: 1937493396}
-  - component: {fileID: 1937493395}
+  - component: {fileID: 4679433010851344523}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -8697,7 +8726,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1937493395}
+      - m_Target: {fileID: 4679433010851344523}
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -8708,7 +8737,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1937493395
+--- !u!114 &4679433010851344523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
